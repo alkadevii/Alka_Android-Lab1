@@ -1,63 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/firstString"
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_message"
-        />
-    <EditText
-        android:id="@+id/editMessage"
-        android:hint="Write something here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/editmessage"
-        />
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/button"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <Button
-        android:id="@+id/myButton"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="@string/button_message"
+        android:layout_marginStart="32dp"
+        android:text="@string/button3"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button" />
 
-        />
-    <CheckBox android:id="@+id/checkbox"
+    <Button
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/checkbox"
-        android:onClick="onCheckboxClicked"/>
-    <RadioButton android:id="@+id/RadioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/RadioButton"
-        android:onClick="onRadioButtonClicked"/>
-    <Switch
-        android:id="@+id/Switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Switch"
-        android:checked="true"
-        />
-    <ImageView
-        android:src="@drawable/logo_algonquin"
-        android:id="@+id/Imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        />
-    <ImageButton
-        android:src="@drawable/logo_algonquin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:id="@+id/myimagebutton"
-        />
-
-
-</LinearLayout>
+        android:layout_marginStart="32dp"
+        android:text="@string/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/button2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
