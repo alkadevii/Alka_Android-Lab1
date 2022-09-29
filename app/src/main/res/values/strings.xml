@@ -2,4 +2,10 @@
     <string name="app_name">Alka\'s Android Lab</string>
     <string name="hello_message">Hello World!</string>
     <string name="button_message">I\'m a button</string>
+    <string name="second_string">second string</string>
+    <string name="third_string">thrid string</string>
+    <string name="editmessage">\"I am an edit text\"</string>
+    <string name="checkbox">checkbox</string>
+    <string name="RadioButton">RadioButton</string>
+    <string name="Switch">switch</string>
 </resources>
