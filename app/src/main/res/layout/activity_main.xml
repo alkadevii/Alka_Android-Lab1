@@ -12,23 +12,21 @@
     android:layout_marginRight="48dp"
     >
 
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="32dp"
         android:nextFocusLeft="@+id/button"
         android:nextFocusRight="@+id/switch1"
         android:nextFocusUp="@id/radioButton"
         android:nextFocusDown="@+id/button2"
         android:text="@string/button3"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck" />
-
 
     <Button
         android:id="@+id/button2"
