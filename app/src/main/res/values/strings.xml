@@ -11,4 +11,5 @@
     <string name="button">Button</string>
     <string name="button2">Button</string>
     <string name="button3">Button</string>
+    <string name="radiobutton">RadioButton</string>
 </resources>

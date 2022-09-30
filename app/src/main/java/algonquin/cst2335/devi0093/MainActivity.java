@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,46 +37,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(variableBinding.getRoot());
 
 
-        variableBinding.myButton.setOnClickListener(click ->
-        {
-            model.isSelected.postValue(variableBinding.editMessage.getText().toString());
-
-        });
-
-        model.isSelected.observe(this, newString -> {
-            variableBinding.firstString.setText("Your edit text has:" + newString);
-
-
-        });
-        variableBinding.checkbox.setOnCheckedChangeListener( (btn,isChecked)->{
+        variableBinding.radioButton.setOnCheckedChangeListener( (btn,isChecked)->{
             model.isSelect.postValue(isChecked);
-            variableBinding.firstString.setText("The value is now:" + isChecked);
-        }); variableBinding.RadioButton.setOnCheckedChangeListener( (btn,isChecked)->{
+
+
+        });
+
+        variableBinding.switch1.setOnCheckedChangeListener( (btn,isChecked)->{
             model.isSelect.postValue(isChecked);
-            variableBinding.firstString.setText("The value is now:" + isChecked);
-        });
-        variableBinding.Switch.setOnCheckedChangeListener( (btn,isChecked)->{
-            model.isSelect.postValue(isChecked);
-            variableBinding.firstString.setText("The value is now:" + isChecked);
         });
 
-        variableBinding.Imageview.setImageResource(R.drawable.logo_algonquin);
-        variableBinding.Imageview.setOnClickListener(click ->
-                Toast.makeText(this,"You Clicked on image",Toast.LENGTH_SHORT).show()
-        );
 
-
-        model.isSelect.observe(this, selected -> {
-            variableBinding.checkbox.setChecked(selected);
-            variableBinding.RadioButton.setChecked(selected);
-            variableBinding.Switch.setChecked(selected);
-
-            Context context = getApplicationContext();
-            CharSequence text = "You clicked the value and it is now:" +selected;
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        });
     }
 }
