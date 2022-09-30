@@ -13,6 +13,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="@string/button"
+        android:nextFocusDown="@id/Switch1"
+        android:nextFocusLeft="@+id/Switch1"
+        android:nextFocusRight="@id/button2"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +41,7 @@
         android:text="@string/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+
         app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toTopOf="@+id/button2" />
 
