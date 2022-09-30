@@ -37,15 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(variableBinding.getRoot());
 
 
-        variableBinding.radioButton.setOnCheckedChangeListener( (btn,isChecked)->{
-            model.isSelect.postValue(isChecked);
 
-
-        });
-
-        variableBinding.switch1.setOnCheckedChangeListener( (btn,isChecked)->{
-            model.isSelect.postValue(isChecked);
-        });
 
 
     }

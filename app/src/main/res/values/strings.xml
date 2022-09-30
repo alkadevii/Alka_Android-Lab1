@@ -12,4 +12,5 @@
     <string name="button2">Button</string>
     <string name="button3">Button</string>
     <string name="radiobutton">RadioButton</string>
+    <string name="spin_message">spinmessage</string>
 </resources>
