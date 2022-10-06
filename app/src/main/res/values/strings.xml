@@ -13,4 +13,7 @@
     <string name="button3">Button</string>
     <string name="radiobutton">RadioButton</string>
     <string name="spin_message">spinmessage</string>
+    <string name="typeEmail">Type email here</string>
+    <string name="passwd">Type your password</string>
+    <string name="login">Login</string>
 </resources>

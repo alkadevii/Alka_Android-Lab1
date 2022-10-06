@@ -3,4 +3,5 @@
     <string name="second_string">second string</string>
     <string name="third_string">thrid string</string>
     <string name="editmessage">\"I am an edit text\"</string>
+    <string name="passwd">Type your password</string>
 </resources>
