@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import algonquin.cst2335.devi0093.databinding.ActivityMainBinding;
@@ -17,11 +19,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(variableBinding.getRoot());
-        variableBinding.loginButton.setOnClickListener(click -> {
-            Intent nextPage = new Intent(MainActivity.this, SecondActivity.class);
-            EditText emailEditText = variableBinding.editTextEmailAddress;
-            nextPage.putExtra("email address",emailEditText.getText().toString());
-            startActivity(nextPage);
+        Button loginButton = variableBinding.loginButton;
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextPage = new Intent(v.getContext(), SecondActivity.class);
+                EditText emailEditText = variableBinding.editTextEmailAddress;
+                nextPage.putExtra("email address", emailEditText.getText().toString());
+                v.getContext().startActivity(nextPage);
+
+            }
         });
         ;
 
