@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/alkad/AndroidStudioProjects/AlkasAndroidLab/app/src/main/res/layout/activity_chat_room.xml" value="0.1" />
         <entry key="..\:/Users/alkad/AndroidStudioProjects/AlkasAndroidLab/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/alkad/AndroidStudioProjects/AlkasAndroidLab/app/src/main/res/layout/sent_message.xml" value="0.22333333333333336" />
       </map>
     </option>
   </component>
