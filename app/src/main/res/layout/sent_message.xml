@@ -8,15 +8,16 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/message"
         tools:layout_editor_absoluteX="90dp"
         tools:layout_editor_absoluteY="45dp" />
 
     <TextView
-        android:id="@+id/Time goes here"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="604dp"
-        tools:layout_editor_absoluteY="135dp" />
+        android:text="@string/time"
+        tools:layout_editor_absoluteX="614dp"
+        tools:layout_editor_absoluteY="210dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,4 +5,7 @@
     <string name="typeEmail">type your email here</string>
     <string name="login">login</string>
     <string name="typePassword">enter your password</string>
+    <string name="message">Message goes here</string>
+    <string name="time">Time goes here</string>
+    <string name="send">sendButton</string>
 </resources>
