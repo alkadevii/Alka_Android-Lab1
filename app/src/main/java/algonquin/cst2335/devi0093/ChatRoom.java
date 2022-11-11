@@ -2,7 +2,6 @@ package algonquin.cst2335.devi0093;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,79 +11,102 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import algonquin.cst2335.devi0093.databinding.ActivityChatRoomBinding;
 import algonquin.cst2335.devi0093.databinding.SentMessageBinding;
+import algonquin.cst2335.devi0093.databinding.RecieveMessageBinding;
 
 public class ChatRoom extends AppCompatActivity {
-    ActivityChatRoomBinding binding;
-    ArrayList<String> messages =new ArrayList<>();
 
-    private RecyclerView.Adapter myAdapter;
+    private ActivityChatRoomBinding binding;
+    private RecyclerView.Adapter<MyRowHolder> myAdapter;
+    ArrayList<ChatMessage> messages;
+    ChatRoomViewModel chatModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityChatRoomBinding.inflate(getLayoutInflater());
+
+        binding = ActivityChatRoomBinding.inflate((getLayoutInflater()));
         setContentView(binding.getRoot());
-        //ChatRoomViewModel
-        /*chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
-        ArrayList<String> messages = chatModel.messages.getValue();
 
-        if(messages == null)
-        {
-            chatModel.messages.postValue( messages = new ArrayList<String>());
-             ArrayList<String> finalMessages = messages;
-        }*/
+        chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
+        messages = chatModel.messages.getValue();
+        if (messages == null) {
+            chatModel.messages.postValue(messages = new ArrayList<ChatMessage>());
+        }
 
-
-        binding.sendButton.setOnClickListener(click -> {
-            messages.add(binding.textInput.getText().toString());
-            myAdapter.notifyItemInserted(messages.size()-1);
-            binding.textInput.setText("");
-        });
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
-
-        binding.recycleView.setAdapter(myAdapter=new RecyclerView.Adapter<MyRowHolder>() {
+        binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                SentMessageBinding binding =SentMessageBinding.inflate(getLayoutInflater());
-                return new MyRowHolder(binding.getRoot());
+                if (viewType == 0) {
+                    SentMessageBinding sendBinding = SentMessageBinding.inflate(getLayoutInflater());
+                    return new MyRowHolder(sendBinding.getRoot());
+                } else {
+                    RecieveMessageBinding receiveBinding = RecieveMessageBinding.inflate(getLayoutInflater());
+                    return new MyRowHolder(receiveBinding.getRoot());
+                }
+
             }
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 holder.messageText.setText("");
                 holder.timeText.setText("");
-                String obj = messages.get(position);
-                holder.messageText.setText(obj);
 
+                ChatMessage obj = messages.get(position);
+                holder.messageText.setText(obj.getMessage());
+                holder.timeText.setText(obj.getTimeSent());
             }
 
             @Override
             public int getItemCount() {
                 return messages.size();
             }
-            public int getItemViewType(int position){
-                return 0;
-            }
 
+            @Override
+            public int getItemViewType(int position) {
+                if (messages.get(position).getIsSentButton() == true) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+
+            }
         });
 
+        binding.sendButton.setOnClickListener(click -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd-MMM-yyy hh-mm-ss a");
+            String currentDateandTIme = sdf.format(new Date());
+            messages.add(new ChatMessage(binding.textInput.getText().toString(), currentDateandTIme, true));
+            myAdapter.notifyItemInserted(messages.size() - 1);
+            binding.textInput.setText("");
+        });
 
-        }
+        binding.receiveButton.setOnClickListener(click -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd-MMM-yyy hh-mm-ss a");
+            String currentDateandTIme = sdf.format(new Date());
+            messages.add(new ChatMessage(binding.textInput.getText().toString(), currentDateandTIme, false));
+            myAdapter.notifyItemInserted(messages.size() - 1);
+            binding.textInput.setText("");
+        });
+        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
+
+
+    }
+
     class MyRowHolder extends RecyclerView.ViewHolder {
         TextView messageText;
         TextView timeText;
 
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
-            messageText=itemView.findViewById(R.id.message);
-            timeText=itemView.findViewById(R.id.time);
+            messageText = itemView.findViewById(R.id.message);
+            timeText = itemView.findViewById(R.id.time);
         }
     }
-
-
 }
-
