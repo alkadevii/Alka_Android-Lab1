@@ -2,6 +2,8 @@ package algonquin.cst2335.devi0093;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,13 +19,24 @@ import algonquin.cst2335.devi0093.databinding.SentMessageBinding;
 
 public class ChatRoom extends AppCompatActivity {
     ActivityChatRoomBinding binding;
-    ArrayList<String> messages = new ArrayList<>();
+    ArrayList<String> messages =new ArrayList<>();
+
     private RecyclerView.Adapter myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityChatRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        //ChatRoomViewModel
+        /*chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
+        ArrayList<String> messages = chatModel.messages.getValue();
+
+        if(messages == null)
+        {
+            chatModel.messages.postValue( messages = new ArrayList<String>());
+             ArrayList<String> finalMessages = messages;
+        }*/
+
 
         binding.sendButton.setOnClickListener(click -> {
             messages.add(binding.textInput.getText().toString());
@@ -51,7 +64,7 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public int getItemCount() {
-                return 0;
+                return messages.size();
             }
             public int getItemViewType(int position){
                 return 0;
