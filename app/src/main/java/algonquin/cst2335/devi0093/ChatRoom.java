@@ -20,7 +20,6 @@ import algonquin.cst2335.devi0093.databinding.SentMessageBinding;
 import algonquin.cst2335.devi0093.databinding.RecieveMessageBinding;
 
 public class ChatRoom extends AppCompatActivity {
-
     private ActivityChatRoomBinding binding;
     private RecyclerView.Adapter<MyRowHolder> myAdapter;
     ArrayList<ChatMessage> messages;
