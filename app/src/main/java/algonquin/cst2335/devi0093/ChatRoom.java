@@ -114,7 +114,8 @@ public class ChatRoom extends AppCompatActivity {
             binding.textInput.setText("");
         });
         binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
-
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd-MMM-yyy hh-mm-ss a");
+        String currentDateandTIme = sdf.format(new Date());
 
     }
 
