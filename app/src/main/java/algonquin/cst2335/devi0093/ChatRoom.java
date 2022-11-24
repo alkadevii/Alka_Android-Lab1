@@ -3,6 +3,8 @@ package algonquin.cst2335.devi0093;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +42,11 @@ public class ChatRoom extends AppCompatActivity {
 
         MessageDatabase db = Room.databaseBuilder(getApplicationContext(), MessageDatabase.class, "database-name").build();
         mDAO = db.cmDAO();
+
+        chatModel.selectedMessage.observe(this, (newMessageValue) -> {
+            MessageDetailsFragment chatFragment = new MessageDetailsFragment( newMessageValue );
+            getSupportFragmentManager().beginTransaction().add(R.id.fragmentlocation, chatFragment).commit();
+        });
 
 
         chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
@@ -101,7 +108,13 @@ public class ChatRoom extends AppCompatActivity {
         binding.sendButton.setOnClickListener(click -> {
             SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd-MMM-yyy hh-mm-ss a");
             String currentDateandTIme = sdf.format(new Date());
-            messages.add(new ChatMessage(binding.textInput.getText().toString(), currentDateandTIme, true));
+            ChatMessage newMessage = new ChatMessage(binding.textInput.getText().toString(), currentDateandTIme, true);
+
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(()->{  mDAO.insertMessage(newMessage);  });
+
+
+            messages.add(newMessage);
             myAdapter.notifyItemInserted(messages.size() - 1);
             binding.textInput.setText("");
         });
@@ -109,6 +122,8 @@ public class ChatRoom extends AppCompatActivity {
         binding.receiveButton.setOnClickListener(click -> {
             SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd-MMM-yyy hh-mm-ss a");
             String currentDateandTIme = sdf.format(new Date());
+
+
             messages.add(new ChatMessage(binding.textInput.getText().toString(), currentDateandTIme, false));
             myAdapter.notifyItemInserted(messages.size() - 1);
             binding.textInput.setText("");
@@ -126,7 +141,12 @@ public class ChatRoom extends AppCompatActivity {
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(clk -> {
-                int position=getAbsoluteAdapterPosition();
+                int position = getAbsoluteAdapterPosition();
+                ChatMessage selected = messages.get(position);
+
+                chatModel.selectedMessage.postValue(selected);
+                });
+                /*
                 AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
                 builder.setMessage("Do you want to delete the message: "+messageText.getText())
                 .setTitle("Question")
@@ -144,10 +164,9 @@ public class ChatRoom extends AppCompatActivity {
                             .show();
                 })
                         .create().show();
-
-            });
-            messageText = itemView.findViewById(R.id.message);
-            timeText = itemView.findViewById(R.id.time);
-        }
+                 */
+                messageText = itemView.findViewById(R.id.message);
+                timeText = itemView.findViewById(R.id.time);
+            }
     }
 }

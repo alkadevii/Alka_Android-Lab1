@@ -5,7 +5,7 @@ plugins {
 android {
     compileSdk 32
     buildFeatures{
-        viewBinding=true;
+        viewBinding true
     }
     defaultConfig {
         applicationId "algonquin.cst2335.devi0093"
@@ -26,6 +26,13 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src\\main\\res', 'src\\main\\res\\layout-sw600dp', 'src\\main\\res\\layout-sw720dp', 'src\\main\\res\\layout-sw600dp1'
+            }
+        }
     }
 }
 
