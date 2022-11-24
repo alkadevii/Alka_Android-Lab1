@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
-
 import algonquin.cst2335.devi0093.databinding.DetailsLayoutBinding;
-
 
 public class MessageDetailsFragment extends Fragment {
     ChatMessage selected;
@@ -18,9 +16,9 @@ public class MessageDetailsFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        return super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater,container,savedInstanceState);
 
-        DetailsLayoutBinding binding= DetailsLayoutBinding.inflate(inflater);
+        DetailsLayoutBinding binding=DetailsLayoutBinding.inflate(inflater);
 
         binding.messageText.setText(selected.message);
         binding.timeText.setText(selected.timeSent);

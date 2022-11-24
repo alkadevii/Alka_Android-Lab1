@@ -43,12 +43,6 @@ public class ChatRoom extends AppCompatActivity {
         MessageDatabase db = Room.databaseBuilder(getApplicationContext(), MessageDatabase.class, "database-name").build();
         mDAO = db.cmDAO();
 
-        chatModel.selectedMessage.observe(this, (newMessageValue) -> {
-            MessageDetailsFragment chatFragment = new MessageDetailsFragment( newMessageValue );
-            getSupportFragmentManager().beginTransaction().add(R.id.fragmentlocation, chatFragment).commit();
-        });
-
-
         chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
         messages = chatModel.messages.getValue();
         if(messages == null)
@@ -63,6 +57,11 @@ public class ChatRoom extends AppCompatActivity {
                 runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
             });
         }
+        chatModel.selectedMessage.observe(this, (newMessageValue) -> {
+            MessageDetailsFragment chatFragment = new MessageDetailsFragment( newMessageValue );
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentlocation, chatFragment).commit();
+        });
+
 
 
         binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
@@ -164,7 +163,9 @@ public class ChatRoom extends AppCompatActivity {
                             .show();
                 })
                         .create().show();
+
                  */
+
                 messageText = itemView.findViewById(R.id.message);
                 timeText = itemView.findViewById(R.id.time);
             }
