@@ -59,7 +59,7 @@ public class ChatRoom extends AppCompatActivity {
         }
         chatModel.selectedMessage.observe(this, (newMessageValue) -> {
             MessageDetailsFragment chatFragment = new MessageDetailsFragment( newMessageValue );
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentlocation, chatFragment).commit();
+            getSupportFragmentManager().beginTransaction().addToBackStack("").replace(R.id.fragmentlocation, chatFragment).commit();
         });
 
 
@@ -121,9 +121,13 @@ public class ChatRoom extends AppCompatActivity {
         binding.receiveButton.setOnClickListener(click -> {
             SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd-MMM-yyy hh-mm-ss a");
             String currentDateandTIme = sdf.format(new Date());
+            ChatMessage newMessage = new ChatMessage(binding.textInput.getText().toString(), currentDateandTIme, false);
+
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(()->{  mDAO.insertMessage(newMessage);  });
 
 
-            messages.add(new ChatMessage(binding.textInput.getText().toString(), currentDateandTIme, false));
+            messages.add(newMessage);
             myAdapter.notifyItemInserted(messages.size() - 1);
             binding.textInput.setText("");
         });
