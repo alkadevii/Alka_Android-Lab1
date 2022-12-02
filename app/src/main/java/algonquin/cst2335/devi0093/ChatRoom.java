@@ -1,8 +1,10 @@
 package algonquin.cst2335.devi0093;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,10 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
@@ -33,12 +39,48 @@ public class ChatRoom extends AppCompatActivity {
     ArrayList<ChatMessage> messages;
     ChatRoomViewModel chatModel;
     ChatMessageDAO mDAO;
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.item_1:
+                Toast.makeText(this, "Deleting the last message", Toast.LENGTH_LONG).show();
+                int position=messages.size()-1;
+                AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
+                builder.setMessage("Do you want to delete the message: ")
+                        .setTitle("Question");
+                       // .setNegativeButton("No",(dialog,cl) -> {}
+                        //.setPositiveButton("Yes",(dialog, cl) -> {
+                            ChatMessage m=messages.get(position);
+
+                            messages.remove(position);
+                            myAdapter.notifyItemRemoved(position);
+
+
+                break;
+            case R.id.item_2:
+
+                Snackbar.make(binding.myToolbar, "Version 1.0, created by Alka Devi", BaseTransientBottomBar.LENGTH_LONG).show();
+                break;
+        }
+        return true;}
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatRoomBinding.inflate((getLayoutInflater()));
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.myToolbar);
 
         MessageDatabase db = Room.databaseBuilder(getApplicationContext(), MessageDatabase.class, "database-name").build();
         mDAO = db.cmDAO();
